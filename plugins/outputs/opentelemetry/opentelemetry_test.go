@@ -370,7 +370,7 @@ func TestOpenTelemetryMetricNameFormatPrometheus(t *testing.T) {
 	metricsConverter, err := influx2otel.NewLineProtocolToOtelMetrics(common.NoopLogger{})
 	require.NoError(t, err)
 	plugin := &OpenTelemetry{
-		ServiceAddress:    m.Address(),
+		ServiceAddress:   m.Address(),
 		Timeout:          config.Duration(time.Second),
 		MetricNameFormat: "prometheus",
 		metricsConverter: metricsConverter,
@@ -417,7 +417,7 @@ func TestOpenTelemetryMetricNameFormatOtel(t *testing.T) {
 	metricsConverter, err := influx2otel.NewLineProtocolToOtelMetrics(common.NoopLogger{})
 	require.NoError(t, err)
 	plugin := &OpenTelemetry{
-		ServiceAddress:    m.Address(),
+		ServiceAddress:   m.Address(),
 		Timeout:          config.Duration(time.Second),
 		MetricNameFormat: "otel",
 		metricsConverter: metricsConverter,
@@ -464,7 +464,7 @@ func TestOpenTelemetryMetricNameFormatDefault(t *testing.T) {
 	metricsConverter, err := influx2otel.NewLineProtocolToOtelMetrics(common.NoopLogger{})
 	require.NoError(t, err)
 	plugin := &OpenTelemetry{
-		ServiceAddress:    m.Address(),
+		ServiceAddress:   m.Address(),
 		Timeout:          config.Duration(time.Second),
 		MetricNameFormat: "", // empty should default to prometheus
 		metricsConverter: metricsConverter,
@@ -496,7 +496,7 @@ func TestOpenTelemetryMetricNameFormatDefault(t *testing.T) {
 
 func TestOpenTelemetryInvalidMetricNameFormat(t *testing.T) {
 	plugin := &OpenTelemetry{
-		ServiceAddress:    "localhost:4317",
+		ServiceAddress:   "localhost:4317",
 		MetricNameFormat: "invalid",
 		Log:              testutil.Logger{},
 	}
@@ -515,7 +515,7 @@ func TestOpenTelemetryMetricNameWithUnderscores(t *testing.T) {
 
 	// Test prometheus format - underscores should remain, dots should be converted
 	plugin := &OpenTelemetry{
-		ServiceAddress:    m.Address(),
+		ServiceAddress:   m.Address(),
 		Timeout:          config.Duration(time.Second),
 		MetricNameFormat: "prometheus",
 		metricsConverter: metricsConverter,
@@ -543,7 +543,7 @@ func TestOpenTelemetryMetricNameWithUnderscores(t *testing.T) {
 
 	// Test otel format - everything should be preserved
 	plugin2 := &OpenTelemetry{
-		ServiceAddress:    m.Address(),
+		ServiceAddress:   m.Address(),
 		Timeout:          config.Duration(time.Second),
 		MetricNameFormat: "otel",
 		metricsConverter: metricsConverter,
